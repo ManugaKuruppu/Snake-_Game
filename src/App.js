@@ -16,7 +16,7 @@ const SnakeGame = () => {
   const [direction, setDirection] = useState({ x: 1, y: 0 });
   const [gameOver, setGameOver] = useState(false);
   const [inputDirection, setInputDirection] = useState(direction);
-  const [speed, setSpeed] = useState(300); // Adjust Speed and initial speed
+  const [speed, setSpeed] = useState(300); // Adjust Speed and initial spee
 
   // Handle Snake Movement and User Input
   useEffect(() => {
