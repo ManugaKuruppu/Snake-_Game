@@ -16,7 +16,6 @@ const SnakeGame = () => {
   const [direction, setDirection] = useState({ x: 1, y: 0 });
   const [gameOver, setGameOver] = useState(false);
   const [inputDirection, setInputDirection] = useState(direction);
-  
 
   // Handle Snake Movement and User Input
   useEffect(() => {
@@ -45,13 +44,13 @@ const SnakeGame = () => {
 
     const gameInterval = setInterval(() => {
       moveSnake();
-    }, 300); // Moves the snake every 300ms
+    }, speed); // Moves the snake at a dynamic speed
 
     return () => {
       clearInterval(gameInterval);
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [snake, direction, gameOver]);
+  }, [snake, direction, gameOver, speed]);
 
   // Move Snake Logic
   const moveSnake = () => {
@@ -70,6 +69,7 @@ const SnakeGame = () => {
     // Check if snake eats the food
     if (head.x === food.x && head.y === food.y) {
       setFood(getRandomPosition()); // Generate new food position
+      setSpeed((prevSpeed) => Math.max(50, prevSpeed - 20)); // Increase speed by reducing the interval
     } else {
       newSnake.pop(); // Remove the tail
     }
