@@ -1,4 +1,6 @@
+// SnakeGame.js
 import React, { useState, useEffect } from "react";
+import PlayerForm from "./PlayerForm"; // Import the player form component
 import "./App.css";
 
 const BOARD_SIZE = 20; // 20x20 grid size
@@ -11,15 +13,16 @@ const getRandomPosition = () => {
 };
 
 const SnakeGame = () => {
+  const [playerName, setPlayerName] = useState(""); // Store player name
   const [snake, setSnake] = useState([{ x: 2, y: 2 }]);
   const [food, setFood] = useState(getRandomPosition());
   const [direction, setDirection] = useState({ x: 1, y: 0 });
   const [gameOver, setGameOver] = useState(false);
-  const [speed, setSpeed] = useState(200); // Initial speed
+  const [speed, setSpeed] = useState(200); // Adjusted initial speed
 
   // Handle Snake Movement and User Input
   useEffect(() => {
-    if (gameOver) return;
+    if (gameOver || !playerName) return;
 
     const handleKeyDown = (e) => {
       switch (e.key) {
@@ -50,7 +53,7 @@ const SnakeGame = () => {
       clearInterval(gameInterval);
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [snake, direction, gameOver, speed]);
+  }, [snake, direction, gameOver, speed, playerName]);
 
   // Check if the snake touches itself
   const checkCollision = (head) => {
@@ -70,7 +73,7 @@ const SnakeGame = () => {
       y: newSnake[0].y + direction.y,
     };
 
-    // Check if snake hits the border
+    // Check if snake hits the border or itself
     if (head.x < 0 || head.x >= BOARD_SIZE || head.y < 0 || head.y >= BOARD_SIZE || checkCollision(head)) {
       setGameOver(true);
       return;
@@ -88,13 +91,20 @@ const SnakeGame = () => {
     setSnake(newSnake);
   };
 
+  // Handle form submission for player name
+  const handleNameSubmit = (name) => {
+    setPlayerName(name); // Set the player's name
+  };
+
   return (
     <div className="game-container">
-      {gameOver ? (
-        <h2>Game Over! Press Refresh to Play Again.</h2>
+      {!playerName ? (
+        <PlayerForm onSubmit={handleNameSubmit} />
+      ) : gameOver ? (
+        <h2>Game Over, {playerName}! Press Refresh to Play Again.</h2>
       ) : (
         <div>
-          <h2>Snake Game</h2>
+          <h2>Welcome, {playerName}! Snake Game</h2>
           <div className="board">
             {[...Array(BOARD_SIZE)].map((_, row) =>
               [...Array(BOARD_SIZE)].map((_, col) => {
