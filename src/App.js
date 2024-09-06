@@ -19,6 +19,7 @@ const SnakeGame = () => {
   const [direction, setDirection] = useState({ x: 1, y: 0 });
   const [gameOver, setGameOver] = useState(false);
   const [speed, setSpeed] = useState(200); // Adjusted initial speed
+  const [score, setScore] = useState(0);
 
   // Handle Snake Movement and User Input
   useEffect(() => {
@@ -83,12 +84,14 @@ const SnakeGame = () => {
     if (head.x === food.x && head.y === food.y) {
       setFood(getRandomPosition()); // Generate new food position
       setSpeed((prevSpeed) => Math.max(50, prevSpeed - 10)); // Increase speed
+      setScore(prevScore => prevScore + 10);
     } else {
       newSnake.pop(); // Remove the tail
     }
 
     newSnake.unshift(head); // Add the new head
     setSnake(newSnake);
+    
   };
 
   // Handle form submission for player name
@@ -105,6 +108,9 @@ const SnakeGame = () => {
       ) : (
         <div>
           <h2>Welcome, {playerName}! Snake Game</h2>
+          <div className="score-board">
+            <h2>Score: {score}</h2>
+          </div>
           <div className="board">
             {[...Array(BOARD_SIZE)].map((_, row) =>
               [...Array(BOARD_SIZE)].map((_, col) => {
