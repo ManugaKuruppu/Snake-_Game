@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 
-const BOARD_SIZE = 10; // 10x10 grid size
+const BOARD_SIZE = 20; // 20x20 grid size
 
 const getRandomPosition = () => {
   return {
@@ -15,8 +15,7 @@ const SnakeGame = () => {
   const [food, setFood] = useState(getRandomPosition());
   const [direction, setDirection] = useState({ x: 1, y: 0 });
   const [gameOver, setGameOver] = useState(false);
-  const [inputDirection, setInputDirection] = useState(direction);
-  const [speed, setSpeed] = useState(300); // Adjust Speed and initial spee
+  const [speed, setSpeed] = useState(200); // Initial speed
 
   // Handle Snake Movement and User Input
   useEffect(() => {
@@ -25,16 +24,16 @@ const SnakeGame = () => {
     const handleKeyDown = (e) => {
       switch (e.key) {
         case "ArrowUp":
-          if (direction.y === 0) setInputDirection({ x: 0, y: -1 }); // Prevents moving backward
+          if (direction.y === 0) setDirection({ x: 0, y: -1 });
           break;
         case "ArrowDown":
-          if (direction.y === 0) setInputDirection({ x: 0, y: 1 });
+          if (direction.y === 0) setDirection({ x: 0, y: 1 });
           break;
         case "ArrowLeft":
-          if (direction.x === 0) setInputDirection({ x: -1, y: 0 });
+          if (direction.x === 0) setDirection({ x: -1, y: 0 });
           break;
         case "ArrowRight":
-          if (direction.x === 0) setInputDirection({ x: 1, y: 0 });
+          if (direction.x === 0) setDirection({ x: 1, y: 0 });
           break;
         default:
           break;
@@ -45,7 +44,7 @@ const SnakeGame = () => {
 
     const gameInterval = setInterval(() => {
       moveSnake();
-    }, speed); // Moves the snake at a dynamic speed
+    }, speed);
 
     return () => {
       clearInterval(gameInterval);
@@ -53,16 +52,26 @@ const SnakeGame = () => {
     };
   }, [snake, direction, gameOver, speed]);
 
+  // Check if the snake touches itself
+  const checkCollision = (head) => {
+    for (let i = 1; i < snake.length; i++) {
+      if (head.x === snake[i].x && head.y === snake[i].y) {
+        return true;
+      }
+    }
+    return false;
+  };
+
   // Move Snake Logic
   const moveSnake = () => {
     const newSnake = [...snake];
     const head = {
-      x: newSnake[0].x + inputDirection.x,
-      y: newSnake[0].y + inputDirection.y,
+      x: newSnake[0].x + direction.x,
+      y: newSnake[0].y + direction.y,
     };
 
     // Check if snake hits the border
-    if (head.x < 0 || head.x >= BOARD_SIZE || head.y < 0 || head.y >= BOARD_SIZE) {
+    if (head.x < 0 || head.x >= BOARD_SIZE || head.y < 0 || head.y >= BOARD_SIZE || checkCollision(head)) {
       setGameOver(true);
       return;
     }
@@ -70,18 +79,17 @@ const SnakeGame = () => {
     // Check if snake eats the food
     if (head.x === food.x && head.y === food.y) {
       setFood(getRandomPosition()); // Generate new food position
-      setSpeed((prevSpeed) => Math.max(50, prevSpeed - 20)); // Increase speed by reducing the interval
+      setSpeed((prevSpeed) => Math.max(50, prevSpeed - 10)); // Increase speed
     } else {
       newSnake.pop(); // Remove the tail
     }
 
     newSnake.unshift(head); // Add the new head
     setSnake(newSnake);
-    setDirection(inputDirection); // Update the current direction to the latest input direction
   };
 
   return (
-    <div className="game-board">
+    <div className="game-container">
       {gameOver ? (
         <h2>Game Over! Press Refresh to Play Again.</h2>
       ) : (
