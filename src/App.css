@@ -24,7 +24,7 @@
 }
 
 .food {
-  background-color: red;
+  background-color: rgb(0, 255, 0);
 }
 
 h2 {
@@ -44,4 +44,19 @@ h2 {
   margin: 0;
   font-size: 24px;
   color: #333;
+}
+
+.obstacle {
+  background-color: rgb(255, 0, 0);
+}
+
+.popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: white;
+  border: 2px solid black;
+  text-align: center;
 }
