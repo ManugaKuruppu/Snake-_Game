@@ -134,7 +134,7 @@ const SnakeGame = () => {
   };
 
   const handleNextLevel = () => {
-    setLevel((prevLevel) => prevLevel + 6); // Move to the next level
+    setLevel((prevLevel) => prevLevel + 1); // Move to the next level
     resetGame();
   };
 
