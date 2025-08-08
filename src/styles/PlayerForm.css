@@ -1,0 +1,160 @@
+/* --- Side-by-side layout for PlayerForm and Instructions --- */
+.form-instructions-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.1rem;
+  width: 100%;
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+@media (max-width: 900px) {
+  .form-instructions-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+}
+/* --- Instructions Styling for Landing Page --- */
+.instructions {
+  margin-top: 2.2rem;
+  background: rgba(224,231,255,0.92);
+  border-radius: 16px;
+  padding: 1.3rem 1.7rem 1.1rem 1.7rem;
+  color: #3730a3;
+  font-size: 1.08rem;
+  box-shadow: 0 2px 12px rgba(99,102,241,0.08);
+  max-width: 420px;
+  text-align: left;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border: 1.5px solid #c7d2fe;
+  margin-left: auto;
+  margin-right: auto;
+  transition: box-shadow 0.2s, border 0.2s;
+}
+
+.instructions ul {
+  margin: 0.5rem 0 0 0;
+  padding-left: 1.2rem;
+  color: #334155;
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+.instructions li {
+  margin-bottom: 0.5rem;
+  padding-left: 0.1rem;
+}
+
+.instructions b {
+  color: #3730a3;
+  font-weight: 700;
+}
+
+.instructions span {
+  font-weight: 600;
+}
+/* PlayerForm.css */
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+  background: none;
+}
+  
+
+.name-form {
+  background: rgba(255,255,255,0.88);
+  box-shadow: 0 8px 40px 0 rgba(99,102,241,0.13), 0 1.5px 8px 0 rgba(99,102,241,0.08);
+  border-radius: 22px;
+  border: 1.5px solid #e0e7ff;
+  padding: 3.2rem 2.5rem 2.5rem 2.5rem;
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
+  animation: fadeInUp 0.8s cubic-bezier(.39,.575,.56,1.000);
+  transition: box-shadow 0.2s, border 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+  
+
+.name-form h2 {
+  font-size: 2rem;
+  margin-bottom: 2.2rem;
+  color: #3730a3;
+  font-weight: 800;
+  letter-spacing: 1px;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+}
+  
+
+.input-field {
+  width: 80%;
+  max-width: 320px;
+  min-width: 180px;
+  margin: 0 auto 1.7rem auto;
+  display: block;
+  padding: 1rem 1.2rem;
+  border: 2px solid #c7d2fe;
+  border-radius: 12px;
+  font-size: 1.13rem;
+  outline: none;
+  background: rgba(255,255,255,0.97);
+  transition: border-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 1.5px 8px rgba(99,102,241,0.08);
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+  text-align: center;
+}
+  
+
+.input-field:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px #6366f133, 0 2px 12px #6366f122;
+}
+  
+
+.submit-btn {
+  padding: 1rem 2.5rem;
+  background: linear-gradient(90deg, #6366f1 60%, #3730a3 100%);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.13rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+  box-shadow: 0 2px 12px rgba(99,102,241,0.13);
+  letter-spacing: 0.5px;
+  margin: 0 auto;
+  display: block;
+}
+  
+
+.submit-btn:hover {
+  background: linear-gradient(90deg, #3730a3 60%, #6366f1 100%);
+  box-shadow: 0 6px 24px rgba(99,102,241,0.18);
+  transform: translateY(-2px) scale(1.03);
+}
+  
+
+.submit-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #6366f133;
+}
+  
