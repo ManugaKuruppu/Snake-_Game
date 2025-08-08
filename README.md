@@ -13,7 +13,7 @@ A beautiful, modern, and challenging twist on the classic Snake arcade game, bui
 - Mobile-friendly and accessible
 
 ## Demo
-[Live Demo Link](#) <!-- Add your deployed link here -->
+[https://sn4ke-gam3.vercel.app/](#) 
 
 
 
